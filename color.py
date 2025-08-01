@@ -1,25 +1,27 @@
 from ultralytics import YOLO
-import pyttsx3
+import pyttsx4
 
-def color(out):
-    for result in out:
-        color= out[0].names[out[0].probs.top1]
-        alert = pyttsx3.init()
-        alert.say(F"{color} colour detected in {path}")
-        alert.runAndWait()
-        alert= None
-    return color
-    
+# 🔊 Speak detected color aloud (Windows SAPI5)
+def speak_color(color_name, path=None):
+    engine = pyttsx4.init(driverName='sapi5')
+    engine.setProperty('rate', 130)
+    engine.setProperty('volume', 1.0)
+    engine.say("Initializing")
+    engine.runAndWait()
 
-alert = pyttsx3.init()
-# Load a model
-model = YOLO('Source\Models\model.pt')  #Trained model
-path = RF'Source/Images/img3.jpg'
+    text = f"The detected color is {color_name}."
+    print("Speaking:", text)
+    engine.say(text)
+    engine.runAndWait()
 
-# Run batched inference on a list of images
-results = model(path)  
+# 📦 Load trained model
+model = YOLO('Source/Models/model.pt')
+path = 'Source/Images/img2.jpg'
 
-# finding color
-output=color(results)
-# Printing Color
-print(output)
+# 🔍 Predict color
+results = model(path)
+color_name = results[0].names[results[0].probs.top1]
+
+# 🖨️ Show + Speak
+print("Detected Color:", color_name)
+speak_color(color_name, path)

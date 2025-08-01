@@ -1,0 +1,37 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env
+.venv/
+env/
+venv/
+*.env
+
+# Conda environment folder (if any)
+*.conda
+conda-meta/
+
+# VSCode / IDE settings
+.vscode/
+*.code-workspace
+.idea/
+
+# Logs and outputs
+*.log
+
+# Model weights (keep private or upload separately)
+Source/Models/*.pt
+*.pth
+*.weights
+
+# MacOS system files
+.DS_Store
+
+# Colab/Notebook metadata
+*.nbconvert.ipynb

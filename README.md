@@ -1,122 +1,103 @@
-﻿# Color_Classification_Model
+﻿# 🎨 Color Classification Model Using YOLOv8
 
-This Deep Learning project detects the color and alerts the human being with the name of the color.
+This project classifies the **dominant color** in an image using a **YOLOv8-based deep learning model**.  
+It is designed to work **independently** or in combination with **object detection models**, allowing the detected object to be color-labeled (e.g., red car, blue bag).
 
-We use the latest deep learning model which provides an accuracy of approximately 75%-85%. We use a custom YOLOv8 model which can classify multiple colors.
+The model doesn't use bounding boxes — it's a **single-label color classifier** that predicts the overall color from the image or a cropped region of interest.
 
-## Packages Used
+---
+
+## 🔗 Live Colab Demo
+
+📌 [Click here to open the project in Colab](https://colab.research.google.com/drive/1gIdj6CAkbitMw4W5Q9YXPPh3-fhR0Oi3?usp=sharing)
+
+> ⚠️ Note: This model takes **image input** and returns a **color label** as output.  
+> For real-time object color detection, integrate it with an object detector.
+
+---
+
+## 🧪 Built With
 
 | **Package** | **Version** |
 | ----------- | ----------- |
-| Python      | 3.8         |
+| Python      | 3.8+        |
 | OpenCV      | 4.8.1       |
-| Yolo        | 8.0.2       |
+| YOLOv8      | 8.0.2       |
 | PyTorch     | 2.1.2       |
-| Pyttsx3     | 2.90        |
+| pyttsx4     | 2.90        |
 
+---
 
-## Run Locally
-
-### NOTE: Orignal Source folder upload [here](https://drive.google.com/drive/folders/1vbjWbTJuW7OtubahUk9dGdVWMkoR9jhC?usp=sharing)
-
-Clone the project
+## 📁 Project Structure
 
 ```bash
-  https://github.com/sonir746/Color_Classification_Model.git
+📦 Color_Classification_Model
+├── Source/
+│   ├── Models/         # YOLOv8 trained model
+│   └── Images/         # Sample images (input/output)
+├── Color-Predict.ipynb  
+├── requirements.txt
+└── README.md
 ```
 
-Go to the project directory
+## 🖼️ Visual Examples
+
+### Training Labels
+<img src="Source/Images/Label.png" width="700" height="200"/>
+
+### Training Data Samples
+<img src="Source/Images/TraningData.png" width="700" height="200"/>
+
+### Training Results
+<img src="Source/Images/results.jpg" width="700" height="200"/>
+
+### Sample Input Image
+<img src="Source/Images/img3.jpg" width="500" height="200"/>
+
+### Predicted Color Output
+<img src="Source/Images/output.png" width="500" height="200"/>
+
+
+## 🚀 Run Locally
+
+### 📦 Download Source Files (Google Drive)
 
 ```bash
-  cd <directory_path>
-```
+# Clone the repository
+git clone https://github.com/sonir746/Color_Classification_Model.git
+cd Color_Classification_Model
 
-Install dependencies
-
-```Python
-  pip install -r requirements.txt
-```
-
-## Training
-
-We use 8 classes of color images to create a label data set and train our model
-
-<img src="Source\Images\Label.png" alt="loading..." style="width:800px;"/>
-
-### Traning Data
-<img src="Source\Images\TraningData.png" alt="loading..." style="width:800px;"/>
-
-## Traning Rusult
-
-<img src="Source\Images\results.jpg" alt="loading..." style="width:800px;"/>
-
-## Testing
-1.	After that we provide input image to model.
-
-2.	Model will extract the feature from the model and perform conditional  operation on the given feature.
-
-3.	After that, it will print and alert with the name of the color.
-
-## Source Code
-
-```Python
-from ultralytics import YOLO
-import pyttsx3
-
-def color(out):
-    for result in out:
-        color= out[0].names[out[0].probs.top1]
-        alert = pyttsx3.init()
-        alert.say(F"{color} colour detected in {path}")
-        alert.runAndWait()
-        alert= None
-    return color
-    
-
-alert = pyttsx3.init()
-# Load a model
-model = YOLO('Source\Models\model.pt')  #Trained model
-path = RF'Source/Images/img2.jpg'
-
-# Run batched inference on a list of images
-results = model(path)  
-
-# finding color
-output=color(results)
-# Printing Color
-print(output)
-
+# Install dependencies
+pip install -r requirements.txt
 
 ```
 
-## Input Image
-<img src="Source\Images\img3.jpg" alt="loading..." style="width:800px; height:500px;"/>
+## 📢 How It Works
 
-## Predicted Image
-<img src="Source\Images\output.png" alt="loading..." style="width:800px;"/>
+- You pass an image path to the model.
 
+- YOLOv8 extracts features and classifies the dominant color.
 
+- The predicted color is printed and spoken aloud using text-to-speech.
 
-## Auther
+Use cases:
 
-👨🏻‍💼RAHUL SONI
+- Detecting the color of objects after object detection (e.g., red bottle, green bag)
 
-[![linkedin](https://img.shields.io/twitter/url?url=https%3A%2F%2Fwww.linkedin.com&style=social&logo=Linkedin&logoColor=White&label=Linkedin&labelColor=blue&color=blue&cacheSeconds=3600
-)](https://www.linkedin.com/in/rahul-soni-004861227)
-[![GitHub](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2F&style=social&logo=GitHub&logoColor=Black&label=GitHub&labelColor=abcdef&color=fedcba&cacheSeconds=3600
-)](https://github.com/sonir746)
+- Assisting color-blind users
 
+- Supporting accessibility in image interpretation
 
 
-## Feedback
+## 👤 Author
+RAHUL SONI
 
-If you have any feedback, please reach out to us at rahulsoni7469@gmail.com
 
-Or
+## 🛠️ Feedback or Issues
+Found a bug or have an idea to improve it?
 
-Report any issue here
-<br>
-👇👇👇
-<br>
-[![GitHub](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com&style=social&logo=GitHub&label=issue&labelColor=grey&color=grey
-)](https://github.com/sonir746/Color_Classification_Model/issues)
+📧 Email: rahulsoni7469@gmail.com
+
+🐞 [Open an issue on GitHub](https://github.com/sonir746/Color_Classification_Model/issues)
+
+
